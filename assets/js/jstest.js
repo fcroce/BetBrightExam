@@ -25,61 +25,73 @@ var flickrClass = function(search_output, results_output) {
     };
 
     this.loadXMLDoc = function() {
-        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&api_key=' + flickrKey + '&user_id=' + flickrUserID + '&per_page=5&tags=' + search;
+        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne??callback=foo&format=json&per_page=5&tags=' + search;
 
-        // Ajax CORS request
-        function createCORSRequest(method, url) {
-            var xhr = new XMLHttpRequest();
 
-            if ("withCredentials" in xhr) {
-                xhr.withCredentials = true;
-                xhr.open(method, url, true);
-            }
-            else if (typeof XDomainRequest != "undefined") {
-                xhr = new XDomainRequest();
-                xhr.open(method, url);
-            }
-            else {
-                xhr = null;
-            }
+        var script = document.createElement('script');
+        script.src = flickrURL;
 
-            return xhr;
-        }
+        document.getElementsByTagName('head')[0].appendChild(script);
 
-        var xhr = createCORSRequest('GET', flickrURL);
-        if (!xhr) {
-            throw new Error('CORS not supported');
-        }
 
-        xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
 
-        // Error
-        xhr.onerror = function() {
-            if (xhr.status == 400) {
-                search_results.innerHTML = 'There was an error 400, please check the console log.';
-            }
-            else {
-                search_results.innerHTML = 'something else other than 200 was returned, please check the console log.';
-            }
-
-            // Log error
-            console.log("xhr.status: " + xhr.status);
-        };
-
-        // Success
-        xhr.onload = function() {
-            if (xhr.responseText.length) {
-                search_results.innerHTML = xhr.responseText;
-            }
-            else {
-                search_results.innerHTML = 'No results found.';
-            }
-        };
-
-        // Send
-        xhr.send();
+        // // Ajax CORS request
+        // function createCORSRequest(method, url) {
+        //     var xhr = new XMLHttpRequest();
+        //
+        //     if ("withCredentials" in xhr) {
+        //         xhr.withCredentials = true;
+        //         xhr.open(method, url, true);
+        //     }
+        //     else if (typeof XDomainRequest != "undefined") {
+        //         xhr = new XDomainRequest();
+        //         xhr.open(method, url);
+        //     }
+        //     else {
+        //         xhr = null;
+        //     }
+        //
+        //     return xhr;
+        // }
+        //
+        // var xhr = createCORSRequest('GET', flickrURL);
+        // if (!xhr) {
+        //     throw new Error('CORS not supported');
+        // }
+        //
+        // xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+        //
+        // // Error
+        // xhr.onerror = function() {
+        //     if (xhr.status == 400) {
+        //         search_results.innerHTML = 'There was an error 400, please check the console log.';
+        //     }
+        //     else {
+        //         search_results.innerHTML = 'something else other than 200 was returned, please check the console log.';
+        //     }
+        //
+        //     // Log error
+        //     console.log("xhr.status: " + xhr.status);
+        // };
+        //
+        // // Success
+        // xhr.onload = function() {
+        //     if (xhr.responseText.length) {
+        //         search_results.innerHTML = xhr.responseText;
+        //     }
+        //     else {
+        //         search_results.innerHTML = 'No results found.';
+        //     }
+        // };
+        //
+        // // Send
+        // xhr.send();
     };
 };
+
+function foo(data) {
+    console.log(data);
+}
 
 
 /**
