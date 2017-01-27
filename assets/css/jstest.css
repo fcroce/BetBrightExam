@@ -1,0 +1,77 @@
+/* Prevent cross-browser misbehaviour */
+* { margin: 0; padding: 0; outline: none; }
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+img { border: none; }
+a, a:hover, a:visited, a:focus { text-decoration: none; }
+p { display: block; }
+strong { display: inline-block; }
+
+html, body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #0f0e14;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Generic */
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#page_wrapper {
+    padding: 40px 30px;
+}
+
+.jstest_button, button.jstest_button {
+    display: inline-block;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: #404040;
+    background-color: #E6E7E9;
+    padding: 5px 50px;
+    margin-left: 20px;
+    border: none;
+    cursor: pointer;
+}
+button.jstest_button {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    margin-left: 2px;
+}
+.jstest_button:first-child, button.jstest_button:first-child {
+    margin-left: 0;
+}
+
+.jstest_input {
+    padding: 4px 10px;
+    font-size: 16px;
+    margin-left: 40px;
+}
+
+.jstest_search {
+    margin-bottom: 60px;
+}
+
+#current_search_title {
+    margin-bottom: 15px;
+}
+#current_search {
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px dashed #d2e4ff;
+}
+
+#jstest_results {
+
+}
