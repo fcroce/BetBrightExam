@@ -22,7 +22,7 @@ var flickrClass = function(search_output, results_output) {
     };
 
     this.loadXMLDoc = function() {
-        var flickrURL = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
+        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
 
         // Ajax CORS request
         function createCORSRequest(method, url) {
