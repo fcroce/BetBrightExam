@@ -26,30 +26,59 @@ var flickrClass = function(search_output, results_output) {
 
         var xmlhttp = new XMLHttpRequest();
 
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == XMLHttpRequest.DONE) {
-                if (xmlhttp.status == 200) {
-                    if (xmlhttp.responseText.length) {
-                        search_results.innerHTML = xmlhttp.responseText;
-                    }
-                    else {
-                        search_results.innerHTML = 'No results found.';
-                    }
-                }
-                else if (xmlhttp.status == 400) {
-                    search_results.innerHTML = 'There was an error 400';
+        xmlhttp.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+        xmlhttp.setRequestHeader( 'Content-Type', 'application/json' );
 
-                    // Log error
-                    console.log("xmlhttp.status: " + xmlhttp.status);
-                }
-                else {
-                    search_results.innerHTML = 'something else other than 200 was returned';
+        xmlhttp.onerror = function(XMLHttpRequest, textStatus, errorThrown) {
+            if (xmlhttp.status == 400) {
+                search_results.innerHTML = 'There was an error 400';
 
-                    // Log error
-                    console.log("xmlhttp.status: " + xmlhttp.status);
-                }
+                // Log error
+                console.log("xmlhttp.status: " + xmlhttp.status);
+            }
+            else {
+                search_results.innerHTML = 'something else other than 200 was returned';
+
+                // Log error
+                console.log("xmlhttp.status: " + xmlhttp.status);
+            }
+
+            // Log error
+            console.log("xmlhttp.status: " + xmlhttp.status);
+        };
+        xmlhttp.onload = function() {
+            if (xmlhttp.responseText.length) {
+                search_results.innerHTML = xmlhttp.responseText;
+            }
+            else {
+                search_results.innerHTML = 'No results found.';
             }
         };
+
+        // xmlhttp.onreadystatechange = function() {
+        //     if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+        //         if (xmlhttp.status == 200) {
+        //             if (xmlhttp.responseText.length) {
+        //                 search_results.innerHTML = xmlhttp.responseText;
+        //             }
+        //             else {
+        //                 search_results.innerHTML = 'No results found.';
+        //             }
+        //         }
+        //         else if (xmlhttp.status == 400) {
+        //             search_results.innerHTML = 'There was an error 400';
+        //
+        //             // Log error
+        //             console.log("xmlhttp.status: " + xmlhttp.status);
+        //         }
+        //         else {
+        //             search_results.innerHTML = 'something else other than 200 was returned';
+        //
+        //             // Log error
+        //             console.log("xmlhttp.status: " + xmlhttp.status);
+        //         }
+        //     }
+        // };
 
         xmlhttp.open("GET", flickrURL, true);
         xmlhttp.send();
