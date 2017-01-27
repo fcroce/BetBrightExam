@@ -19,8 +19,11 @@ var flickrObj = new (function() {
         var search = encodeURIComponent(element.getAttribute("search").trim());
 
         if (search.length) {
-            current_search.innerHTML = search;
+            // Reset previous search
+            search_results.innerHTML = '';
 
+            // Start a new search
+            current_search.innerHTML = search;
             self.loadFromFlickr(search, 5);
         }
     };
