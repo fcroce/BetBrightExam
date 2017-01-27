@@ -68,9 +68,9 @@ var flickrObj = new (function() {
                 '<div class="flickr_item radius-3">' +
                     '<h3 class="flickr_title">' + title + ' - By: ' + author + '</h3>' +
 
-                    '<section class="flickr_image shadow_bottom radius-5">' +
+                    '<section class="flickr_image radius-5">' +
                         '<a class="radius-5" target="_blank" href="' + link+ '" title="' + title+ '">' +
-                            '<img class="radius-5" src="' + media + '" alt="' + title+ '" title="' + title+ '" />' +
+                            '<img class="shadow_bottom radius-5" src="' + media + '" alt="' + title+ '" title="' + title+ '" />' +
                         '</a>' +
 
                         '<div class="flickr_date radius-5-bottom">' +

@@ -112,8 +112,6 @@ button.jstest_button {
 }
 .flickr_image {
     position: relative;
-    width: 240px;
-    overflow: hidden;
     margin-bottom: 15px;
 }
 .flickr_image:hover .flickr_date { opacity: 1 }
