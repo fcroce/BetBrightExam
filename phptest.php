@@ -5,14 +5,16 @@ if (!class_exists('nextDrawDate')) require_once 'libs/next_draw_date.php';
 
 $next_date = '';
 
-if (isset($_POST['get_next_draw']) && !empty($_POST['get_next_draw'])) {
-    if ( (bool) $_POST['get_next_draw'] ) {
-        $current_date = $_POST['input_date'] ? htmlspecialchars($_POST['input_date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');
+// Update "Next date" field when the form is submitted
+if (isset($_POST['get_next_draw']) && !empty($_POST['get_next_draw']) && (bool) $_POST['get_next_draw']) {
+    // Get input date (current datetime if empty)
+    $current_date = $_POST['input_date'] ? htmlspecialchars($_POST['input_date'], ENT_QUOTES, 'UTF-8') : date('Y-m-d H:i:s');
 
-        $oNextDrawDate = new nextDrawDate($current_date);
+    // Create a new object with the input date
+    $oNextDrawDate = new nextDrawDate($current_date);
 
-        $next_date = $oNextDrawDate->getNextDate();
-    }
+    // Calculate next valid date and update
+    $next_date = $oNextDrawDate->getNextDate();
 }
 
 ?><!DOCTYPE html>
@@ -41,6 +43,10 @@ if (isset($_POST['get_next_draw']) && !empty($_POST['get_next_draw'])) {
     </form>
 
     <div>Next date: <?php echo $next_date; ?></div>
+
+    <br />
+
+    <div>Note: if a date is older than the current week then it will return the next valid date for that week</div>
 
 </div>
 
