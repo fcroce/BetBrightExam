@@ -41,7 +41,7 @@ var flickrObj = new (function() {
 
         for(var i=0 ; i<json.items.length; i++) {
             var title = (typeof json.items[i].title != 'undefined') ? json.items[i].title : '';
-            var author = (typeof json.items[i].author != 'undefined') ? unescape(json.items[i].author) : '';
+            var author = (typeof json.items[i].author != 'undefined') ? decodeURIComponent(json.items[i].author) : '';
             var published = (typeof json.items[i].published != 'undefined') ? (new Date(Date.parse(json.items[i].published))).toDateString() : '';
             var link = (typeof json.items[i].link != 'undefined') ? json.items[i].link : '';
 
