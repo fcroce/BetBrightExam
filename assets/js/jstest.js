@@ -40,8 +40,8 @@ var flickrObj = new (function() {
         }
 
         for(var i=0 ; i<json.items.length; i++) {
-            var title = (typeof json.items[i].title != 'undefined') ? json.items[i].title : '';
-            var author = (typeof json.items[i].author != 'undefined') ? json.items[i].author : '';
+            var title = (typeof json.items[i].title != 'undefined') ? this.decodeFromUnicode(json.items[i].title) : '';
+            var author = (typeof json.items[i].author != 'undefined') ? this.decodeFromUnicode(json.items[i].author) : '';
             var published = (typeof json.items[i].published != 'undefined') ? (new Date(Date.parse(json.items[i].published))).toDateString() : '';
             var link = (typeof json.items[i].link != 'undefined') ? json.items[i].link : '';
 
@@ -159,6 +159,10 @@ var flickrObj = new (function() {
         //
         // // Send
         // xhr.send();
+    };
+
+    this.decodeFromUnicode = function(string) {
+        return decodeURIComponent(JSON.parse('"' + string.replace(/\"/g, '\\"') + '"'));
     };
 }) ();
 
