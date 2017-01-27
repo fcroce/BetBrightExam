@@ -50,18 +50,12 @@ var flickrClass = function(search_output, results_output) {
         xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
         xhr.setRequestHeader( 'Content-Type', 'application/json' );
 
-        xhr.onerror = function(xhrRequest, textStatus, errorThrown) {
+        xhr.onerror = function() {
             if (xhr.status == 400) {
                 search_results.innerHTML = 'There was an error 400';
-
-                // Log error
-                console.log("xhr.status: " + xhr.status);
             }
             else {
                 search_results.innerHTML = 'something else other than 200 was returned';
-
-                // Log error
-                console.log("xhr.status: " + xhr.status);
             }
 
             // Log error
