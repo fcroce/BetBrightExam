@@ -42,9 +42,11 @@ if (isset($_POST['get_next_draw']) && !empty($_POST['get_next_draw']) && (bool) 
         <button type="submit">Get next valid draw date</button>
     </form>
 
+    <br />
+
     <div>Next date: <?php echo $next_date; ?></div>
 
-    <br />
+    <br /><hr />
 
     <div>Note: if a date is older than the current week then it will return the next valid date for that week</div>
 
