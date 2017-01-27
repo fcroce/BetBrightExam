@@ -26,6 +26,7 @@ var flickrClass = function(search_output, results_output) {
 
         var xmlhttp = new XMLHttpRequest();
 
+        xmlhttp.open('GET', flickrURL, true);
         xmlhttp.setRequestHeader( 'Access-Control-Allow-Origin', '*');
         xmlhttp.setRequestHeader( 'Content-Type', 'application/json' );
 
