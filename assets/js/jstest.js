@@ -4,6 +4,9 @@ var flickrClass = function(search_output, results_output) {
     var current_search = search_output;
     var search_results = results_output;
 
+    var flickrKey = 'a404635a5f3a1b948bc12985f741ed0d';
+    var flickrUserID = '151578598@N08';
+
     var el = null;
     var search = '';
 
@@ -22,7 +25,7 @@ var flickrClass = function(search_output, results_output) {
     };
 
     this.loadXMLDoc = function() {
-        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
+        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&api_key=' + flickrKey + '&user_id=' + flickrUserID + '&per_page=5&tags=' + search;
 
         // Ajax CORS request
         function createCORSRequest(method, url) {
