@@ -1,40 +1,101 @@
-var flickrClass = function(search_output, results_output) {
-    var $this = this;
+var flickrObj = new (function() {
+    var self = this;
 
-    var current_search = search_output;
-    var search_results = results_output;
-
-    var flickrKey = 'a404635a5f3a1b948bc12985f741ed0d';
-    var flickrUserID = '151578598@N08';
+    var current_search = null;
+    var search_results = null;
 
     var el = null;
-    var search = '';
 
-    $this.searchImages = function(e, element) {
+    self.setSearchUIElements = function(search_output, results_output) {
+        current_search = search_output;
+        search_results = results_output;
+    };
+
+    self.searchImages = function(e, element) {
         e.preventDefault();
 
         el = element;
 
-        search = encodeURIComponent(element.getAttribute("search").trim());
+        var search = encodeURIComponent(element.getAttribute("search").trim());
 
         if (search.length) {
             current_search.innerHTML = search;
 
-            this.loadXMLDoc();
+            self.loadFromFlickr(search, 5);
         }
     };
 
-    this.loadXMLDoc = function() {
-        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne??callback=foo&format=json&per_page=5&tags=' + search;
+    self.flickResponse = function(json) {
+        if (typeof json.items == 'undefined') {
+            search_results.innerHTML = 'No items found.';
+            return;
+        }
 
+        for(var i=0 ; i<json.items.length; i++) {
+            var title = (typeof json.items[i].title != 'undefined') ? json.items[i].title : '';
+            var author = (typeof json.items[i].author != 'undefined') ? json.items[i].author : '';
+            var published = (typeof json.items[i].published != 'undefined') ? (new Date(Date.parse(json.items[i].published))).toDateString() : '';
+            var link = (typeof json.items[i].link != 'undefined') ? json.items[i].link : '';
 
+            var tags_list = (typeof json.items[i].tags != 'undefined') ? json.items[i].tags.split(" ") : [];
+
+            var tags = '';
+            for(var j=0 ; j<tags_list.length ; j++) {
+                tags += '<li>' + tags_list[j] + '</li>';
+            }
+
+            var media = '';
+            if (typeof json.items[i].media != 'undefined') {
+                if (typeof json.items[i].media.m != 'undefined') {
+                    media = json.items[i].media.m;
+                }
+            }
+
+            if (!media.length) {
+                search_results.innerHTML = 'No items found.';
+                return;
+            }
+
+            search_results.innerHTML +=
+                '<div class="flickr_item">' +
+                    '<h3 class="flickr_title">' + author + '</h3>' +
+
+                    '<section class="flickr_image">' +
+                        '<a href="' + link+ '" title="' + title+ '">' +
+                            '<img src="' + media + '" alt="' + title+ '" title="' + title+ '"' +
+                        '</a>' +
+                    '</section>' +
+
+                    '<div class="flickr_date">' +
+                        '<p>Published on: ' + published + '</p>' +
+                    '</div>' +
+
+                    '<div class="flickr_tags">' +
+                        '<div>Tags:</div>' +
+                        '<ul>' + tags + '</ul>' +
+                    '</div>' +
+                '</div>';
+        }
+    };
+
+    this.loadFromFlickr = function(search, per_page) {
+        var flickrURL = 'https://www.flickr.com/services/feeds/photos_public.gne?jsoncallback=flickrObj.flickResponse&format=json&per_page=' + per_page + '&tags=' + search;
+
+        /*
+         * Flickr solved their Cross Origin issues with JSONP which cannot be called via "XMLHttpRequest".
+         * Also they changed their APIs from:
+         *      https://api.flickr.com
+         * To:
+         *      https://www.flickr.com
+         */
         var script = document.createElement('script');
         script.src = flickrURL;
 
         document.getElementsByTagName('head')[0].appendChild(script);
 
-
-
+        /*
+         * Cross Origin Issue here
+         */
         // // Ajax CORS request
         // function createCORSRequest(method, url) {
         //     var xhr = new XMLHttpRequest();
@@ -60,6 +121,7 @@ var flickrClass = function(search_output, results_output) {
         // }
         //
         // xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+        // xhr.setRequestHeader("Content-Type",'application/x-www-form-urlencoded');
         //
         // // Error
         // xhr.onerror = function() {
@@ -87,23 +149,19 @@ var flickrClass = function(search_output, results_output) {
         // // Send
         // xhr.send();
     };
-};
-
-function foo(data) {
-    console.log(data);
-}
+}) ();
 
 
 /**
  * Main
  */
 var init = function() {
-    var $this = this;
+    var self = this;
 
     var current_search  = document.getElementById('current_search');
     var jstest_results  = document.getElementById('jstest_results');
 
-    var flickrObj = new flickrClass(current_search, jstest_results);
+    flickrObj.setSearchUIElements(current_search, jstest_results);
 
     var cow             = document.getElementById('cow');
     var dog             = document.getElementById('dog');
@@ -122,8 +180,8 @@ var init = function() {
         flickrObj.searchImages(e, custom);
     };
 
-    custom.addEventListener( 'keydown', function(e) { if (e.keyCode === 13) $this.sendCustomSearch(e); }, false);
-    custom_send.addEventListener( 'click', function(e) { $this.sendCustomSearch(e); }, false);
+    custom.addEventListener( 'keydown', function(e) { if (e.keyCode === 13) self.sendCustomSearch(e); }, false);
+    custom_send.addEventListener( 'click', function(e) { self.sendCustomSearch(e); }, false);
 };
 
 /**
