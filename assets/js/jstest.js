@@ -50,6 +50,7 @@ var flickrClass = function(search_output, results_output) {
 
         // xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
 
+        // Error
         xhr.onerror = function() {
             if (xhr.status == 400) {
                 search_results.innerHTML = 'There was an error 400, please check the console log.';
@@ -61,6 +62,8 @@ var flickrClass = function(search_output, results_output) {
             // Log error
             console.log("xhr.status: " + xhr.status);
         };
+
+        // Success
         xhr.onload = function() {
             if (xhr.responseText.length) {
                 search_results.innerHTML = xhr.responseText;
@@ -70,6 +73,7 @@ var flickrClass = function(search_output, results_output) {
             }
         };
 
+        // Send
         xhr.send();
     };
 };
