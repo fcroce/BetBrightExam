@@ -22,7 +22,7 @@ var flickrClass = function(search_output, results_output) {
     };
 
     this.loadXMLDoc = function() {
-        var flickrURL = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
+        var flickrURL = 'http://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
 
         // Ajax CORS request
         function createCORSRequest(method, url) {
@@ -49,7 +49,6 @@ var flickrClass = function(search_output, results_output) {
         }
 
         // xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
-        // xhr.setRequestHeader( 'Content-Type', 'application/json' );
 
         xhr.onerror = function() {
             if (xhr.status == 400) {
