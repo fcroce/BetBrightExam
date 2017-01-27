@@ -48,8 +48,8 @@ var flickrClass = function(search_output, results_output) {
             throw new Error('CORS not supported');
         }
 
-        xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
-        xhr.setRequestHeader( 'Content-Type', 'application/json' );
+        // xhr.setRequestHeader( 'Access-Control-Allow-Origin', '*');
+        // xhr.setRequestHeader( 'Content-Type', 'application/json' );
 
         xhr.onerror = function() {
             if (xhr.status == 400) {
