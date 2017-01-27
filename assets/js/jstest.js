@@ -46,7 +46,7 @@ var flickrObj = new (function() {
 
             var tags = '';
             for(var j=0 ; j<tags_list.length ; j++) {
-                tags += '<li><a href="https://www.flickr.com/photos/tags/' + tags_list[j] + '" title="' + tags_list[j] + '">' + tags_list[j] + '</a></li>';
+                tags += '<li><a target="_blank" href="https://www.flickr.com/photos/tags/' + tags_list[j] + '" title="' + tags_list[j] + '">' + tags_list[j] + '</a></li>';
             }
 
             var media = '';
@@ -66,7 +66,7 @@ var flickrObj = new (function() {
                     '<h3 class="flickr_title">By: ' + author + '</h3>' +
 
                     '<section class="flickr_image shadow_bottom radius-5">' +
-                        '<a class="radius-5" href="' + link+ '" title="' + title+ '">' +
+                        '<a class="radius-5" target="_blank" href="' + link+ '" title="' + title+ '">' +
                             '<img class="radius-5" src="' + media + '" alt="' + title+ '" title="' + title+ '" />' +
                         '</a>' +
 
