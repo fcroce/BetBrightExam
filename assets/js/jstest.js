@@ -53,10 +53,10 @@ var flickrClass = function(search_output, results_output) {
 
         xhr.onerror = function() {
             if (xhr.status == 400) {
-                search_results.innerHTML = 'There was an error 400';
+                search_results.innerHTML = 'There was an error 400, please check the console log.';
             }
             else {
-                search_results.innerHTML = 'something else other than 200 was returned';
+                search_results.innerHTML = 'something else other than 200 was returned, please check the console log.';
             }
 
             // Log error
