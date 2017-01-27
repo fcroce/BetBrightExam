@@ -22,7 +22,7 @@ var flickrObj = new (function() {
 
         if (search.length) {
             // Reset previous search
-            search_results.innerHTML = '';
+            search_results.innerHTML = 'Loading ...';
 
             // Start a new search
             current_search.innerHTML = search;
@@ -31,6 +31,9 @@ var flickrObj = new (function() {
     };
 
     self.flickResponse = function(json) {
+        // Clear the result area
+        search_results.innerHTML = '';
+
         if (typeof json.items == 'undefined') {
             search_results.innerHTML = 'No items found.';
             return;
