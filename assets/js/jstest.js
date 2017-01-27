@@ -25,7 +25,7 @@ var flickrClass = function(search_output, results_output) {
         var flickrURL = 'https://api.flickr.com/services/feeds/photos_public.gne?format=json&tags=' + search;
 
         function createCORSRequest(method, url) {
-            var xhr = new xhrRequest();
+            var xhr = new XMLHttpRequest();
 
             if ("withCredentials" in xhr) {
                 xhr.withCredentials = true;
