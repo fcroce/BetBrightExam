@@ -20,7 +20,7 @@ html, body {
     height: 100vh;
 }
 
-input[type="text"], input[type="button"] {
+input[type="text"], button {
     font-size: 16px;
     line-height: 16px;
     font-weight: 400;
