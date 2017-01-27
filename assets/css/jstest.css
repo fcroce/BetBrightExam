@@ -27,6 +27,31 @@ html, body {
     clear: both;
 }
 
+.radius-3 {
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+.radius-5 {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.radius-5-bottom {
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.shadow_bottom {
+    -webkit-box-shadow: 0px 2px 12px 1px rgba(158,158,158,1);
+    -moz-box-shadow: 0px 2px 12px 1px rgba(158,158,158,1);
+    box-shadow: 0px 2px 12px 1px rgba(158,158,158,1);
+}
+
 #page_wrapper {
     padding: 40px 30px;
 }
@@ -72,6 +97,61 @@ button.jstest_button {
     border-bottom: 1px dashed #d2e4ff;
 }
 
-#jstest_results {
-
+/* Flickr results */
+.flickr_item {
+    padding: 20px;
+    margin-top: 30px;
+    background: #f2f4fc;
+}
+.flickr_item:first-child {
+    margin-top: 0;
+}
+.flickr_title {
+    margin-bottom: 10px;
+    font-weight: 400;
+}
+.flickr_image {
+    position: relative;
+    width: 240px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.flickr_image:hover .flickr_date { opacity: 1 }
+.flickr_image > a {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+.flickr_image > a > img {
+    display: block;
+    height: 100%;
+}
+.flickr_date {
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: calc(100% - 30px);
+    background: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    padding: 8px 15px;
+    text-align: right;
+    -webkit-transition: opacity 0.5s ease;
+    -moz-transition: opacity 0.5s ease;
+    -o-transition: opacity 0.5s ease;
+    transition: opacity 0.5s ease;
+}
+.flickr_tags > div {
+    margin-bottom: 10px;
+}
+.flickr_tags ul {
+    list-style: none;
+}
+.flickr_tags ul li {
+    float: left;
+    margin-left: 15px;
+    font-style: italic;
+}
+.flickr_tags ul li > a {
+    color: #616161;
 }

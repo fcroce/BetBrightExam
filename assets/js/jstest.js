@@ -1,6 +1,8 @@
 var flickrObj = new (function() {
     var self = this;
 
+    var max_items = 5;
+
     var current_search = null;
     var search_results = null;
 
@@ -44,7 +46,7 @@ var flickrObj = new (function() {
 
             var tags = '';
             for(var j=0 ; j<tags_list.length ; j++) {
-                tags += '<li>' + tags_list[j] + '</li>';
+                tags += '<li><a href="https://www.flickr.com/photos/tags/' + tags_list[j] + '" title="' + tags_list[j] + '">' + tags_list[j] + '</a></li>';
             }
 
             var media = '';
@@ -60,24 +62,27 @@ var flickrObj = new (function() {
             }
 
             search_results.innerHTML +=
-                '<div class="flickr_item">' +
-                    '<h3 class="flickr_title">' + author + '</h3>' +
+                '<div class="flickr_item radius-3">' +
+                    '<h3 class="flickr_title">By: ' + author + '</h3>' +
 
-                    '<section class="flickr_image">' +
-                        '<a href="' + link+ '" title="' + title+ '">' +
-                            '<img src="' + media + '" alt="' + title+ '" title="' + title+ '"' +
+                    '<section class="flickr_image shadow_bottom radius-5">' +
+                        '<a class="radius-5" href="' + link+ '" title="' + title+ '">' +
+                            '<img class="radius-5" src="' + media + '" alt="' + title+ '" title="' + title+ '" />' +
                         '</a>' +
-                    '</section>' +
 
-                    '<div class="flickr_date">' +
-                        '<p>Published on: ' + published + '</p>' +
-                    '</div>' +
+                        '<div class="flickr_date radius-5-bottom">' +
+                            '<p>' + published + '</p>' +
+                        '</div>' +
+                    '</section>' +
 
                     '<div class="flickr_tags">' +
                         '<div>Tags:</div>' +
-                        '<ul>' + tags + '</ul>' +
+                        '<ul class="clearfix">' + tags + '</ul>' +
                     '</div>' +
                 '</div>';
+
+            // Max items
+            if ( (i + 1) >= max_items ) return;
         }
     };
 
