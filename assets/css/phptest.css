@@ -1,0 +1,26 @@
+/* Prevent cross-browser misbehaviour */
+* { margin: 0; padding: 0; outline: none; }
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+img { border: none; }
+a, a:hover, a:visited, a:focus { text-decoration: none; }
+p { display: block; }
+strong { display: inline-block; }
+
+html, body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    color: #0f0e14;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Generic */
+#page_wrapper {
+    padding: 40px 30px;
+}
