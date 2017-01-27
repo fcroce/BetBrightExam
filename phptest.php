@@ -48,7 +48,10 @@ if (isset($_POST['get_next_draw']) && !empty($_POST['get_next_draw']) && (bool) 
 
     <br /><hr />
 
-    <div>Note: if a date is older than the current week then it will return the next valid date for that week</div>
+    <div>
+        Note: if a date is older than the current week then it will return the next valid date for that week<br />
+        (it will be pointless to calculate from that day because the next valid day would be the next Wednesday or Saturday from today)
+    </div>
 
 </div>
 
