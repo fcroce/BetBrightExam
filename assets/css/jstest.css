@@ -111,6 +111,7 @@ button.jstest_button {
     font-weight: 400;
 }
 .flickr_image {
+    display: inline-block;
     position: relative;
     margin-bottom: 15px;
 }
